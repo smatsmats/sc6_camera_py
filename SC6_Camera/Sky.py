@@ -4,9 +4,7 @@ import datetime
 from SC6_Camera import Logger
 
 
-class Sun():
-    longitude = 0
-    latitude = 0
+class Sky():
 
     def __init__(self, config):
 
@@ -23,9 +21,9 @@ class Sun():
 
         self.sky_message = "Sunrise / Sunset times:\n"
 
-        m = ephem.Mars('1970')
-        print(ephem.constellation(m))
         self.load()
+
+        self.logger.debug(self.sky_message)
 
     def load(self):
 
@@ -50,8 +48,8 @@ class Sun():
         self.sky_message += "Moon rise: %s set: %s\n" % (
             self.moonrise, self.moonset)
 
-#        self.noon = (
-        self.logger.debug(self.sky_message)
+        self.noon = datetime.datetime(self.dt.year, self.dt.month, self.dt.day, 12, 0, 0)
+        self.sky_message += "Noon is: %s\n" % self.noon
 
     def body_rise_set(self, body, horizon=0):
         here = ephem.Observer()

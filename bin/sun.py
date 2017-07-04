@@ -17,13 +17,13 @@ c = Config.Config(
      mode=mode,
      config_in=None)
 config = c.getConfig()
+print config['Logging']['LogConfig']
+
 debug = c.getDebug()
 
 l = Logger.Logger(config)
 logger = l.getLogger("sun.py")
 logger.info("getting started mode: %s" % mode)
 
-
-s = Sky.Sun(config)
-print config['Logging']['LogConfig']
-print s.sky_message
+sky = Sky.Sky(config)
+print sky.sky_message
