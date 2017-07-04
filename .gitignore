@@ -1,0 +1,6 @@
+*.swp
+*.swo
+sekrits/*
+logs/*
+bin/*.pyc
+SC6_Camera/*.pyc
