@@ -2,8 +2,11 @@
 
 import sys
 import paths
+import pprint
+import datetime
 from SC6_Camera import Sky
 from SC6_Camera import Config
+from SC6_Camera import Logger
 
 config_file = "/usr/local/cam/conf/config_test.yml"
 mode = "test"
@@ -13,11 +16,14 @@ c = Config.Config(
     config_file=config_file,
      mode=mode,
      config_in=None)
-config=c.getConfig()
-debug=c.getDebug()
+config = c.getConfig()
+debug = c.getDebug()
+
+l = Logger.Logger(config)
+logger = l.getLogger("sun.py")
+logger.info("getting started mode: %s" % mode)
 
 
-s = Sky.Sun()
-# print c.config
-# print c.Logging.LogConfig
+s = Sky.Sun(config)
 print config['Logging']['LogConfig']
+print s.sky_message
