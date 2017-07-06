@@ -23,21 +23,21 @@ logger = l.getLogger("sun.py")
 
 sky = Sky.Sky(config)
 
-print "Current time: %s" % sky.current_time()
+print ("Current time: " + sky.current_time())
 
-if  force:
-    print "We're forced to do this"
+if force:
+    print ("We're forced to do this")
 else:
     if sky.is_sun():
-        print "Sun is up!"
+        print ("Sun is up!")
     elif sky.is_hour_after_dusk():
-        print "Sun is down, but for less than an hour!"
+        print ("Sun is down, but for less than an hour!")
     else:
-        print "Sun is down!"
+        print ("Sun is down!")
 
-print sky.sky_message
-print "is_sun: %d" % sky.is_sun()
-print "is_hour_after_dusk: %d" % sky.is_hour_after_dusk()
-print "is_after_sunrise: %d" % sky.is_after_sunrise()
-print "is_after_noon: %d" % sky.is_after_noon()
-print "is_after_sunset: %d" % sky.is_after_sunset()
+print (sky.sky_message)
+print ("is_sun: %d" + str(sky.is_sun()))
+print ("is_hour_after_dusk: %d" + str(sky.is_hour_after_dusk()))
+print ("is_after_sunrise: %d" + str(sky.is_after_sunrise()))
+print ("is_after_noon: %d" + str(sky.is_after_noon()))
+print ("is_after_sunset: %d" + str(sky.is_after_sunset()))

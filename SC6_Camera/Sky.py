@@ -33,7 +33,7 @@ class Sky():
         twilight_options = (
             'Astronomical', 'Nautical', 'Civil', 'Horizon', 'User')
         if self.twilight_type not in twilight_options:
-            print "TwilightType not set correctly"
+            print("TwilightType not set correctly")
             exit(1)
         selected_angle = "Angle" + self.twilight_type
         self.horizon_selected = config['Sun'][selected_angle]
