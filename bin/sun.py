@@ -31,3 +31,6 @@ print sky.sky_message
 print "is_sun: %d" % sky.is_sun()
 print "is_hour_after_dusk: %d" % sky.is_hour_after_dusk()
 
+print "is_after_sunrise: %d" % sky.is_after_sunrise()
+print "is_after_noon: %d" % sky.is_after_noon()
+print "is_after_sunset: %d" % sky.is_after_sunset()

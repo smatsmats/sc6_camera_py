@@ -82,7 +82,7 @@ class Sky():
             self.moonrise, self.moonset)
 
         self.noon = datetime.datetime(
-            self.dt.year, self.dt.month, self.dt.day, 12, 0, 0)
+            self.dt.year, self.dt.month, self.dt.day, 12, 0, 0, 0, self.tz)
         self.sky_message += "Noon is: %s" % self.noon
 
     def body_rise_set(self, body, horizon=0):
@@ -129,6 +129,22 @@ class Sky():
         self.check4newday(self.dt)
 
         if self.dt >= self.start_time and self.dt <= self.end_time:
+            return 1
+        else:
+            return 0
+
+    def is_after_noon(self):
+        return(self.is_after(self.noon))
+
+    def is_after_sunrise(self):
+        return(self.is_after(self.sunrise))
+
+    def is_after_sunset(self):
+        return(self.is_after(self.sunset))
+
+    def is_after(self, thing):
+        self.dt = datetime.datetime.now(self.tz)
+        if self.dt >= thing:
             return 1
         else:
             return 0
