@@ -15,7 +15,8 @@ class Sky():
 
         self.tz = pytz.timezone(config['General']['Timezone'])
         self.utctz = pytz.timezone('UTC')
-        self.dt = datetime.datetime.now(self.tz)
+
+        self.dt = self.tz.localize(datetime.datetime.now())
 
         self.longitude = config['Sun']['Long']
         self.latitude = config['Sun']['Lat']
@@ -119,7 +120,7 @@ class Sky():
             self.load()
 
     def is_hour_after_dusk(self):
-        self.dt = datetime.datetime.now(self.tz)
+        self.dt = self.tz.localize(datetime.datetime.now())
         self.check4newday(self.dt)
         up = self.start_time
         down = self.end_time + datetime.timedelta(hours=1)
@@ -130,7 +131,7 @@ class Sky():
             return 0
 
     def is_sun(self):
-        self.dt = datetime.datetime.now(self.tz)
+        self.dt = self.tz.localize(datetime.datetime.now())
         self.check4newday(self.dt)
 
         if self.dt >= self.start_time and self.dt <= self.end_time:
@@ -148,8 +149,12 @@ class Sky():
         return(self.is_after(self.sunset))
 
     def is_after(self, thing):
-        self.dt = datetime.datetime.now(self.tz)
+        self.dt = self.tz.localize(datetime.datetime.now())
         if self.dt >= thing:
             return 1
         else:
             return 0
+
+    def current_time(self):
+        self.dt = self.tz.localize(datetime.datetime.now())
+        return(self.dt.isoformat())
