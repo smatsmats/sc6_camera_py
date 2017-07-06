@@ -25,5 +25,9 @@ l = Logger.Logger(config)
 logger = l.getLogger("sun.py")
 logger.info("getting started mode: %s" % mode)
 
+dt = datetime.datetime.now()
 sky = Sky.Sky(config)
 print sky.sky_message
+print "is_sun: %d" % sky.is_sun()
+print "is_hour_after_dusk: %d" % sky.is_hour_after_dusk()
+
