@@ -49,7 +49,7 @@ class Sky():
         # we calculate all of these since it's fun to show the times
         (self.sunrise, self.sunset) = self.body_rise_set(
             sun, self.horizon_neutral)
-        self.sky_message += "Horizon sunrise: %s sunset: %s\n" % (
+        self.sky_message += "Sunrise: %s sunset: %s\n" % (
             self.sunrise, self.sunset)
 
         (self.civil_dawn, self.civil_dusk) = self.body_rise_set(
@@ -81,8 +81,8 @@ class Sky():
         self.sky_message += "Moon rise: %s set: %s\n" % (
             self.moonrise, self.moonset)
 
-        self.noon = datetime.datetime(
-            self.dt.year, self.dt.month, self.dt.day, 12, 0, 0, 0, self.tz)
+        self.noon = self.tz.localize(datetime.datetime(
+            self.dt.year, self.dt.month, self.dt.day, 12, 0, 0))
         self.sky_message += "Noon is: %s" % self.noon
 
     def body_rise_set(self, body, horizon=0):
@@ -98,12 +98,17 @@ class Sky():
         here.lon = self.longitude
         here.horizon = horizon
 
+        # days's rising / setting
         body_rise = ephem.localtime(here.next_rising(body))
-        body_rise = body_rise.replace(microsecond=0, tzinfo=self.tz)
         body_set = ephem.localtime(here.next_setting(body))
-        body_set = body_set.replace(microsecond=0, tzinfo=self.tz)
+        # get rid of rounding error
+        body_rise = body_rise.replace(microsecond=0)
+        body_set = body_set.replace(microsecond=0)
+        # localize
+        body_rise_l = self.tz.localize(body_rise)
+        body_set_l = self.tz.localize(body_set)
 
-        return(body_rise, body_set)
+        return(body_rise_l, body_set_l)
 
     def sky_message(self):
         return self.sky_message
