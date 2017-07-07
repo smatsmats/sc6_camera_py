@@ -4,3 +4,4 @@ sekrits/*
 logs/*
 bin/*.pyc
 SC6_Camera/*.pyc
+*/__pycache__
